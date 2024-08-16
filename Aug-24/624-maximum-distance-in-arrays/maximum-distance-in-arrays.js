@@ -10,8 +10,8 @@ var maxDistance = function (arrays) {
     for (let i = 1; i < arrays.length; i++) {
         let min = arrays[i][0]
         let max = arrays[i][arrays[i].length - 1]
-        maxDistance = Math.max(maxDistance, Math.abs(max - globalMin))
-        maxDistance = Math.max(maxDistance, Math.abs(min - globalMax))
+        maxDistance = Math.max(maxDistance, Math.abs(max - globalMin),Math.abs(min - globalMax))
+        // maxDistance = Math.max(maxDistance, )
 
         globalMax = Math.max(globalMax, max)
         globalMin = Math.min(globalMin, min)
