@@ -18,17 +18,37 @@ const createList = (edges, n) => {
     return list
 }
 
-const dfs = (list, source, destination,visited = new Set()) => {
-    visited.add(source)
-    const edge = list.get(source)
+// const dfs = (list, source, destination,visited = new Set()) => {
+//     visited.add(source)
+//     const edge = list.get(source)
+//     if (edge && edge.length > 0) {
+//         for (const neighbor of edge) {
+//             if (!visited.has(neighbor)) dfs(list,neighbor,destination,visited)
+//         }
+//     }
+//     return visited
+// }
+
+const dfsDP = (list, source, destination, memo = new Map(), visited = new Set()) => {
+    // If we have already computed the path from this node, return it
+    if (memo.has(source)) return memo.get(source);
+    
+    visited.add(source);
+    const edge = list.get(source);
+    
     if (edge && edge.length > 0) {
         for (const neighbor of edge) {
-            if (!visited.has(neighbor)) dfs(list,neighbor,destination,visited)
+            if (!visited.has(neighbor)) {
+                dfsDP(list, neighbor, destination, memo, visited);
+            }
         }
     }
-    return visited
-}
+    
+    // Store the computed result to avoid redundant calculations
+    memo.set(source, visited);
+    return visited;
+};
 var validPath = function (n, edges, source, destination) {
     const list = createList(edges, n)
-    return dfs(list,source,destination).has(destination)
+    return dfsDP(list,source,destination).has(destination)
 };
