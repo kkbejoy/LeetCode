@@ -4,24 +4,30 @@
  * @return {number[]}
  */
 var numsSameConsecDiff = function (n, k) {
+
+
     const result = [];
-    const dfs = (num, length) => {
-        if (length === n) {
-            result.push(num);
-            return;
+    const queue = [];
+    for (let i = 1; i <= 9; i++) {
+        queue.push(i)
+    }
+    if (n === 1) queue.push(0);
+
+    while (queue.length > 0) {
+        const num = queue.shift();
+        if (num.toString().length === n) {
+            result.push(num)
+            continue
         }
-        const lastDigit = num % 10;
-        const nextDigits = new Set([lastDigit + k, lastDigit - k])
+        const last = num % 10;
+        const nextDigits = new Set([last + k, last - k])
         for (let next of nextDigits) {
             if (next >= 0 && next <= 9) {
-                dfs(num * 10 + next, length + 1)
+                queue.push(num * 10 + next)
             }
         }
 
     }
-    for (let i = 1; i <= 9; i++) {
-        dfs(i, 1);
-    }
-    if (n === 1) result.push(0);
-    return result;
+    return result
+
 };
