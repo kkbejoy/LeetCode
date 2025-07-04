@@ -29,10 +29,35 @@ var numIslands = function (grid) {
         for (let j = 0; j < n; j++) {
             if (grid[i][j] === "1" && !visited[i][j]) {
                 islands++;
-                dfs(grid, visited, i, j, m, n)
+                // dfs(grid, visited, i, j, m, n)
+
+                const queue = [[i, j]];
+                visited[i][j] = true
+                while (queue.length > 0) {
+                    const [currI, currJ] = queue.shift()
+                    const directions = [[0, -1], [0, 1], [-1, 0], [1, 0]];
+                    for (k = 0; k < 4; k++) {
+                        const newI = currI + directions[k][0]
+                        const newJ = currJ + directions[k][1]
+                        if (isWithinLimist(newI, newJ, m, n) && grid[newI][newJ] === "1" && !visited[newI][newJ]) {
+                            visited[newI][newJ] = true
+                            queue.push([newI, newJ])
+                        }
+
+                    }
+
+
+                }
+
+
+
             }
         }
     }
 
     return islands
 };
+
+// const bfs=(grid,visited,)=>{
+
+// }
