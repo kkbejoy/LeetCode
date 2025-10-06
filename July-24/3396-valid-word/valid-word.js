@@ -13,13 +13,9 @@ var isValid = function (word) {
     for (let i = 0; i < word.length; i++) {
         if (symbols.includes(word[i])) return false
         else if (digits.includes(Number(word[i]))) continue
-            // console.log(word[i],digits.includes(word[i].toString()))
-
          if (vowels.includes(word[i].toLowerCase())) isVowel = true
         else isConsonant = true
-        // else if()
     }
-    console.log(isVowel, isConsonant)
     return isVowel && isConsonant
 
 };
