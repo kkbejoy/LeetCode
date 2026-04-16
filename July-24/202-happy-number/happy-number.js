@@ -5,13 +5,13 @@
 
 const isHappy  = (n) => {
     let slow = n;
-    fast = getSquare(n)
+    let fast = getSquare(n)
 
     while (slow !== 1 && fast !== slow) {
         slow = getSquare(slow)
         fast = getSquare(getSquare(fast))
     }
-    return fast === 1
+    return slow === 1
 }
 
 const getSquare = (num) => {
