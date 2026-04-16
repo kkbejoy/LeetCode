@@ -7,11 +7,11 @@ const isHappy  = (n) => {
     let slow = n;
     let fast = getSquare(n)
 
-    while (slow !== 1 && fast !== slow) {
+    while (fast !== 1 && fast !== slow) {
         slow = getSquare(slow)
         fast = getSquare(getSquare(fast))
     }
-    return slow === 1
+    return fast === 1
 }
 
 const getSquare = (num) => {
